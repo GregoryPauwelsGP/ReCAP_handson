@@ -1,4 +1,4 @@
-using { Currency, managed, sap } from '@sap/cds/common';
+using { Currency, managed, sap, cuid } from '@sap/cds/common';
 namespace sap.capire.bookshop; 
 
 entity Books : managed { 
@@ -9,8 +9,16 @@ entity Books : managed {
   genre  : Association to Genres;
   stock  : Integer;
   price  : Decimal(9,2);
+  ratings : Association to many Ratings on ratings.book = $self;
+  virtual averageRating : Decimal(2,1);
   virtual stockCriticality : Int16;
-  //currency : Currency;
+  currency : Currency;
+}
+
+entity Ratings : managed, cuid {
+  book   : Association to Books;
+  stars  : Integer;
+  comment: String; 
 }
 
 entity Authors : managed { 
@@ -19,7 +27,6 @@ entity Authors : managed {
   books  : Association to many Books on books.author = $self;
 }
 
-/** Hierarchically organized Code List for Genres */
 entity Genres : sap.common.CodeList { 
   key ID   : Integer;
   parent   : Association to Genres;

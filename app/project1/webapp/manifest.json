@@ -114,6 +114,17 @@
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
                     "type": "ResponsiveTable"
+                  },
+                  "columns": {
+                    "DataField::ID": {
+                      "width": "4rem"
+                    },
+                    "DataField::genre::name": {
+                      "width": "5rem"
+                    },
+                    "DataFieldForAnnotation::DataPoint::averageRating1": {
+                      "width": "10rem"
+                    }
                   }
                 }
               }

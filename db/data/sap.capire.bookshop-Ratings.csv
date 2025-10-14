@@ -1,0 +1,9 @@
+ID,book_ID,stars,comment,createdAt,createdBy,modifiedAt,modifiedBy
+1,201,4,Pretty good book,,,,
+2,201,3,Ok good book,,,,
+3,207,5,Pretty good book,,,,
+4,207,3,Ok good book,,,,
+5,251,2,Not so good,,,,
+6,251,3,Ok good book,,,,
+7,271,2,Cat dies,,,,
+8,271,1,Weazle dies,,,,
