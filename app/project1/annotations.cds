@@ -112,4 +112,20 @@ annotate service.Books with {
     }
 };
 
-
+annotate service.inCreateBook with {
+    author @Common.ValueList : {
+        $Type : 'Common.ValueListType',
+        CollectionPath : 'Authors',
+        Parameters : [
+            {
+                $Type : 'Common.ValueListParameterInOut',
+                LocalDataProperty : author,
+                ValueListProperty : 'ID',
+            },
+            {
+                $Type : 'Common.ValueListParameterDisplayOnly',
+                ValueListProperty : 'name',
+            },
+        ],
+    };
+};

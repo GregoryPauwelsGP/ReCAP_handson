@@ -5,14 +5,25 @@ service AdminService @(requires:'authenticated-user') {
   entity Genres as projection on my.Genres;
 
   action Books.createBook(
-      ID : Integer,
-  title  : String(111),
-  descr  : String(1111),
-  //author : Authors,
-  //genre  : Genres,
-  stock  : Integer,
-  price  : Decimal(9,2),
+    ID     :inCreateBook:ID,
+    title  :inCreateBook:title,
+    descr  :inCreateBook:descr,
+    author :inCreateBook:author,
+    genre  :inCreateBook:genre,
+    stock  :inCreateBook:stock,
+    price  :inCreateBook:price,
   //currency : String(5),
   ) returns Books;
+
+    type inCreateBook :{
+    ID      : Integer;
+    title   : String;
+    descr   : String;
+    author  : Integer;
+    genre   : Integer;
+    stock   : Integer;
+    price   : Decimal(9,2);
+    currency : String;
+  }
 
 }
