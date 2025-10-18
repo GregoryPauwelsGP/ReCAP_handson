@@ -26,20 +26,37 @@ File or Folder | Purpose
 
 Learn more at https://cap.cloud.sap/docs/get-started/.
 
-📚 Bookshop Project (SAP CAP)
+
+
+
+## 📚 Bookshop Project (SAP CAP)
 This project demonstrates how to build a simple CAP (Cloud Application Programming) model with Node.js, including domain models, services, and custom logic.
 ________________________________________
+
+
 🚀 1. Initialize the Project
 Create a new project using the CDS (Core Data Services) CLI:
+```
 cds init bookshop
 cd bookshop
+```
+
 Then, start the project watcher:
+```
 cds watch
-You’ll see:
+```
+
+You’ll see: 
+```
 No models found in db/, srv/, app/, schema, services.
 Waiting for some to arrive...
+```
+
 Let’s fix that by adding our domain models.
 ________________________________________
+
+
+
 🧩 2. Capture Domain Models
 Create a new file named db/schema.cds and paste the following content:
 using { Currency, managed, sap } from '@sap/cds/common';
@@ -70,6 +87,9 @@ entity Genres : sap.common.CodeList {
   children : Composition of many Genres on children.parent = $self;
 }
 ________________________________________
+
+
+
 🧠 3. Provide Services
 After saving the model, cds watch will now display:
 No service definitions found in loaded models.
@@ -92,6 +112,9 @@ service CatalogService {
   entity Books as projection on my.Books;
 }
 ________________________________________
+
+
+
 ⚙️ 4. Add Custom Logic
 While the generic CAP service provides CRUD operations automatically, you can add custom logic by placing .js files next to their corresponding .cds files.
 Folder Structure
@@ -118,11 +141,9 @@ class CatalogService extends cds.ApplicationService {
         book.title += ` -- 11% discount!`
       }
     })
-
     return super.init()
   }
 }
-
 module.exports = CatalogService
 ________________________________________
 🔄 6. Consuming Other Services
@@ -414,5 +435,43 @@ You’ve now successfully:
 •	Populated it dynamically in the after READ event handler
 •	Configured the Fiori UI to visually display stock criticality with color-coded icons
 This improves usability by giving end-users a quick visual insight into stock levels.
+
+
+🧩 Adding Value Help for Authors in the Create Book Popup
+
+To enable Value Help (F4 help) for the Authors field in the popup used to create a book, several additions were made.
+
+1. Create Book Popup
+
+The popup is used to create a new book using the action createBook on the Books entity within admin-service.cds.
+
+2. Add Annotations for Author Value Help
+
+To display a dropdown list of available authors in the popup, the following annotation must be added to your annotation.cds file:
+
+annotate service.inCreateBook with {
+    author @Common.ValueList : {
+        $Type : 'Common.ValueListType',
+        CollectionPath : 'Authors',
+        Parameters : [
+            {
+                $Type : 'Common.ValueListParameterInOut',
+                LocalDataProperty : author,
+                ValueListProperty : 'ID',
+            },
+            {
+                $Type : 'Common.ValueListParameterDisplayOnly',
+                ValueListProperty : 'name',
+            },
+        ],
+    };
+};
+
+
+This annotation connects the author field in the popup to the Authors entity, allowing users to select an author by name while binding the corresponding ID value.
+
+3. Update the Books Entity
+
+Ensure that the author property in your Books entity is not commented out so it can be properly linked and used by the value help.
 
 

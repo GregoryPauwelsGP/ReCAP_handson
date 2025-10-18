@@ -12,7 +12,7 @@ service AdminService @(requires:'authenticated-user') {
     genre  :inCreateBook:genre,
     stock  :inCreateBook:stock,
     price  :inCreateBook:price,
-  //currency : String(5),
+    currency : inCreateBook:currency,
   ) returns Books;
 
     type inCreateBook :{

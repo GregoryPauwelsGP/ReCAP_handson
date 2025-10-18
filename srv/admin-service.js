@@ -31,7 +31,16 @@ module.exports = class AdminService extends cds.ApplicationService { init() {
 
   
   this.on('Books.createBook', async (req) => {
-    const newBook = req.data;
+    const newBook = {};
+    newBook.ID = req.data.ID;
+    newBook.title = req.data.title;
+    newBook.descr = req.data.descr;
+    newBook.author = { ID: req.data.author };
+    newBook.genre = { ID: req.data.genre };
+    newBook.stock = req.data.stock;
+    newBook.price = req.data.price;
+    newBook.currency = { code: req.data.currency };
+    console.log('Creating new book:', newBook);
     await INSERT.into(Books).entries(newBook);
     return newBook;
   });
