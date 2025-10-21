@@ -281,15 +281,6 @@ ________________________________________
 
 
 
-### Verify the Results
-You can check the new entry by querying the Books entity directly:
-curl http://localhost:4004/admin/Books
-or by visiting the AdminService endpoint in your browser.
-
-________________________________________
-
-
-
 ### Summary
 You’ve successfully extended your CAP project with a custom action that:
 -	Defines a new API (Books.createBook) in the service layer.
