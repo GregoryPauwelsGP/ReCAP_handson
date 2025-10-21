@@ -483,8 +483,3 @@ This part of the annotations.cds file adds a value help annotation to the author
 
 This annotation connects the author field in the popup to the Authors entity, allowing users to select an author by name while binding the corresponding ID value.
 
-### Update the Books Entity
-
-Ensure that the author property in your Books entity is not commented out so it can be properly linked and used by the value help.
-
-
