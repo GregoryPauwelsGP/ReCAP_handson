@@ -335,9 +335,9 @@ ________________________________________
 
 ## 4. Add button in UI for custom action
 ### Add a Custom Action Button to the Table
-1.	In your Application Info panel, click “Page Map”.
+1.	In your Application Info panel, click “Page Map” or open it by pressing ctrl + shift + P and type "Show page map".
 This opens the Page Editor view for your Fiori app.
-2.	Select the Books List Report Page (or the page showing your book table).
+2.	Select the Books List Report Page (or the page showing your book table) and press the edit button.
 3.	Navigate to the Table section and click the “+” button to add a new action to the toolbar.
 4.	Under Add Actions, you’ll find your custom action
 → Books.createBook
