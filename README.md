@@ -71,8 +71,8 @@ Waiting for some to arrive...
 ```
 
 We’ll now define two services:
-•	AdminService — For administrators to manage Books and Authors.
-•	CatalogService — For users to browse and order books.
+-	AdminService — For administrators to manage Books and Authors.
+-	CatalogService — For users to browse and order books.
 
 Create the following files:
 
@@ -444,12 +444,12 @@ ________________________________________
 
 
 ### Observe the Result
-When you run your CAP + Fiori app:
-•	The Books table now displays the stock values with color-coded indicators based on stock levels:
-o	High stock (>100) → Criticality 3
-o	Medium stock (10–50) → Criticality 2
-o	Low stock (<10) → Criticality 1
-•	The icon representation makes it easy to quickly identify low, medium, or high stock books.
+When you run your CAP + Fiori app the Books table now displays the stock values with color-coded indicators based on stock levels:
+-	High stock (>100) → Criticality 3
+-	Medium stock (10–50) → Criticality 2
+-	Low stock (<10) → Criticality 1
+
+The icon representation makes it easy to quickly identify low, medium, or high stock books.
 
 
 ### Summary
