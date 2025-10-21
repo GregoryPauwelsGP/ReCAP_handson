@@ -185,10 +185,10 @@ ID,title,author_ID,stock
 271,Catweazle,170,22
 ```
 Each row represents a book with:
-•	ID: unique identifier
-•	title: book title
-•	author_ID: links to an author in Authors.csv
-•	stock: current stock quantity
+-	ID: unique identifier
+-	title: book title
+-	author_ID: links to an author in Authors.csv
+-	stock: current stock quantity
 ________________________________________
 
 
@@ -212,8 +212,8 @@ ________________________________________
 
 ### Summary
 You’ve now built a complete CAP Bookshop project featuring:
-•	Domain models (db/schema.cds)
-•	Services (srv/*.cds)  
+-	Domain models (db/schema.cds)
+-	Services (srv/*.cds)  
 
 ________________________________________
 
@@ -292,9 +292,9 @@ ________________________________________
 
 ### Summary
 You’ve successfully extended your CAP project with a custom action that:
-•	Defines a new API (Books.createBook) in the service layer.
-•	Implements server-side logic in admin-service.js.
-•	Enables administrators to create new books through HTTP POST calls.
+-	Defines a new API (Books.createBook) in the service layer.
+-	Implements server-side logic in admin-service.js.
+-	Enables administrators to create new books through HTTP POST calls.
 ________________________________________
 
 
@@ -312,12 +312,12 @@ ________________________________________
 3.	Choose Fiori: Open Application Generator from the command palette.
 4.	Select the following options:
 
-o	Template: List Report Page
-o	Data Source: Use a local CAP project
-o	Choose a CAP project: bookshop
-o	Service: AdminService
-o Main entity: Books
-o No navigation
+- **Template:** List Report Page  
+- **Data Source:** Use a local CAP project  
+- **Choose a CAP project:** bookshop  
+- **Service:** AdminService  
+- **Main entity:** Books  
+- **Navigation:** None
 Click Finish to generate the app.
 ________________________________________
 
@@ -327,8 +327,8 @@ ________________________________________
 Restart your CAP server so that it picks up the new Fiori UI module:
 cds watch
 When the server restarts, you’ll notice some changes:
-•	A new folder, in folder bookshop/app, has been created.
-•	The package.json file now includes Fiori build dependencies.
+-	A new folder, in folder bookshop/app, has been created.
+-	The package.json file now includes Fiori build dependencies.
 ________________________________________
 
 
@@ -349,8 +349,8 @@ ________________________________________
 
 ### Review the Changes
 Once the action is added:
-•	The Fiori app automatically adds a toolbar button in your Books table UI.
-•	When pressed, it calls your custom CAP action (Books.createBook) defined earlier in admin-service.cds and admin-service.js.
+-	The Fiori app automatically adds a toolbar button in your Books table UI.
+-	When pressed, it calls your custom CAP action (Books.createBook) defined earlier in admin-service.cds and admin-service.js.
 ________________________________________
 
 
@@ -360,8 +360,8 @@ From your CAP project root, start the development server again:
 cds watch
 Then open the provided URL (usually http://localhost:4004) and select your Fiori App.
 You should now see:
-•	A Book List table populated with data from your CAP service.
-•	A button for your custom action (e.g., “Add New Book”) on the toolbar.
+-	A Book List table populated with data from your CAP service.
+-	A button for your custom action (e.g., “Add New Book”) on the toolbar.
 Clicking the button triggers your backend action and inserts a new book record.
 ________________________________________
 
@@ -370,10 +370,10 @@ ________________________________________
 
 ### Summary
 You’ve now successfully:
-•	Generated a Fiori List Report Page using the Application Generator
-•	Integrated it with your CAP service layer
-•	Added a custom UI button that calls your Books.createBook action
-•	Verified that UI and backend work seamlessly together
+-	Generated a Fiori List Report Page using the Application Generator
+-	Integrated it with your CAP service layer
+-	Added a custom UI button that calls your Books.createBook action
+-	Verified that UI and backend work seamlessly together
 
 ________________________________________
 
@@ -454,9 +454,9 @@ o	Low stock (<10) → Criticality 1
 
 ### Summary
 You’ve now successfully:
-•	Added a virtual field stockCriticality to the Books entity
-•	Populated it dynamically in the after READ event handler
-•	Configured the Fiori UI to visually display stock criticality with color-coded icons
+-	Added a virtual field stockCriticality to the Books entity
+-	Populated it dynamically in the after READ event handler
+-	Configured the Fiori UI to visually display stock criticality with color-coded icons
 This improves usability by giving end-users a quick visual insight into stock levels.
 
 ________________________________________
