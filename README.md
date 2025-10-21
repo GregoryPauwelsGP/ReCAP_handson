@@ -72,7 +72,7 @@ Waiting for some to arrive...
 
 We’ll now define two services:
 •	AdminService — For administrators to manage Books and Authors.
-•	CatalogService — For users to browse and order books under /browse.
+•	CatalogService — For users to browse and order books.
 
 Create the following files:
 
@@ -106,18 +106,6 @@ ________________________________________
 ### Add Custom Logic
 While the generic CAP service provides CRUD operations automatically, you can add custom logic by placing .js files next to their corresponding .cds files.
 
-Folder Structure:
-bookshop/
-├─ db/
-│  └─ schema.cds
-├─ srv/
-│  ├─ admin-service.cds
-│  ├─ cat-service.cds
-└─ package.json
-________________________________________
-
-
-### Implement Service Logic
 Create the file srv/cat-service.js and add custom event handlers:
 
 ```
@@ -225,8 +213,7 @@ ________________________________________
 ### Summary
 You’ve now built a complete CAP Bookshop project featuring:
 •	Domain models (db/schema.cds)
-•	Services (srv/*.cds)
-•	Custom logic (srv/*.js)
+•	Services (srv/*.cds)  
 
 ________________________________________
 
@@ -234,7 +221,7 @@ ________________________________________
 ## 2. Custom action
 
 ### Adding Custom Actions
-To extend the functionality of the CAP Bookshop application, we’ll add a custom action that allows administrators to create new books via a dedicated API endpoint.
+To extend the functionality of the CAP Bookshop application, we’ll add a custom action that allows users to create new books.
 
 
 ### Define the Action in srv/admin-service.cds
@@ -262,6 +249,7 @@ Open your srv/admin-service.cds file and add the following action and type insid
     currency : String;
   }
 ```
+This part of the admin-service.cds file defines a custom action called createBook on your Book entity that is used to create a new book record. The action takes several input parameters such as ID, title, description, author, genre, stock, price, and currency. These parameters are based on a structured type called inCreateBook, which defines the data types and structure for the input. The action returns a Books entity, meaning that after execution it provides the created book entry as a result. In short, this section defines how the createBook action receives and returns data within the CAP service.
 ________________________________________
 
 
@@ -287,28 +275,9 @@ Add the following implementation:
   });
 
 ```
+This part of the admin-service file contains the implementation of the Books.createBook action. When the action is triggered, it receives the input data from the request and creates a new book object based on that information. The code maps the provided values, such as ID, title, description, author, genre, stock, price, and currency, into the structure expected by the Books entity. It also wraps related fields like author, genre, and currency inside objects to match their relationships in the data model. After constructing the new book object, it is inserted into the Books table in the database, and the created record is returned as the result. This logic ensures that a new book is correctly created and stored whenever the createBook action is called.
 ________________________________________
 
-
-
-### Test the Action
-1.	Make sure your CAP server is running:
-2.	cds watch
-3.	Open the AdminService endpoint (e.g., http://localhost:4004/admin/Books) in your browser or test tool.
-4.	Use Postman or curl to call your new action:
-Example using curl
-curl -X POST \
-http://localhost:4004/admin/Books/createBook \
--H "Content-Type: application/json" \
--d '{
-  "ID": 101,
-  "title": "New CAP Adventures",
-  "descr": "A practical guide to CAP with Node.js",
-  "stock": 50,
-  "price": 29.99
-}'
-5.	You should get a JSON response containing the created book record.
-________________________________________
 
 
 
@@ -330,7 +299,6 @@ ________________________________________
 
 
 ## 3. Adding Fiori UI
-🎨 9. Adding a Fiori UI (List Report Page)
 After creating and testing the backend services, let’s add a Fiori Elements UI to manage and visualize book data from our CAP project.
 We’ll use the Fiori Application Generator built into  Visual Studio Code with the SAP Fiori tools extension.
 
@@ -346,9 +314,10 @@ ________________________________________
 
 o	Template: List Report Page
 o	Data Source: Use a local CAP project
-o	Main Entity: Books
+o	Choose a CAP project: bookshop
 o	Service: AdminService
-o	Application Title: Bookshop UI
+o Main entity: Books
+o No navigation
 Click Finish to generate the app.
 ________________________________________
 
@@ -358,37 +327,15 @@ ________________________________________
 Restart your CAP server so that it picks up the new Fiori UI module:
 cds watch
 When the server restarts, you’ll notice some changes:
-•	A new folder, usually named app/bookshop, has been created.
+•	A new folder, in folder bookshop/app, has been created.
 •	The package.json file now includes Fiori build dependencies.
-•	The xs-app.json (for routing) and ui5.yaml configuration files are added automatically.
 ________________________________________
 
-
-
-### Explore the UI Structure
-The generated Fiori app typically looks like this:
-bookshop/
-├─ app/
-│  └─ bookshop/
-│     ├─ webapp/
-│     │  ├─ manifest.json
-│     │  ├─ annotations.cds
-│     │  ├─ pages/
-│     │  └─ ...
-│     └─ package.json
-├─ srv/
-│  ├─ admin-service.cds
-│  ├─ admin-service.js
-│  ├─ cat-service.cds
-│  └─ cat-service.js
-└─ db/
-   └─ schema.cds
-________________________________________
 
 
 ## 4. Add button in UI for custom action
 ### Add a Custom Action Button to the Table
-1.	In your Application Info panel, click “Open Page Map”.
+1.	In your Application Info panel, click “Page Map”.
 This opens the Page Editor view for your Fiori app.
 2.	Select the Books List Report Page (or the page showing your book table).
 3.	Navigate to the Table section and click the “+” button to add a new action to the toolbar.
@@ -402,7 +349,6 @@ ________________________________________
 
 ### Review the Changes
 Once the action is added:
-•	Check your manifest.json — it now includes metadata for your new button and its binding to the CAP action.
 •	The Fiori app automatically adds a toolbar button in your Books table UI.
 •	When pressed, it calls your custom CAP action (Books.createBook) defined earlier in admin-service.cds and admin-service.js.
 ________________________________________
@@ -461,7 +407,7 @@ ________________________________________
 
 ### Change representation of the stock in the UI
 
-Open srv/cat-service.js (or the service handling Books) and add logic to populate stockCriticality after reading Books:
+Open srv/admin-service.js (or the service handling Books) and add logic to populate stockCriticality after reading Books:
 ```
 this.after('READ', Books, async (books, req) => {
   const data = Array.isArray(books) ? books : [books];
@@ -518,9 +464,7 @@ ________________________________________
 
 
 ## 6. Value help 
-🧩 Adding Value Help for Authors in the Create Book Popup
-
-To enable Value Help (F4 help) for the Authors field in the popup used to create a book, several additions were made.
+Adding Value Help for Authors in the Create Book Popup. To enable Value Help for the Authors field in the popup used to create a book, several additions were made.
 
 ### Add Annotations for Author Value Help
 
@@ -544,6 +488,7 @@ annotate service.inCreateBook with {
     };
 };
 ```
+This part of the annotations.cds file adds a value help annotation to the author field. It specifies that the author property should provide a dropdown or selection list populated from the Authors entity. The annotation defines which property in the local data (author) corresponds to the key in the value list (ID) and which property is used for display (name). This allows users to select an author by name when creating a book, while the underlying ID is stored in the database, improving usability and consistency in the application.
 
 This annotation connects the author field in the popup to the Authors entity, allowing users to select an author by name while binding the corresponding ID value.
 
