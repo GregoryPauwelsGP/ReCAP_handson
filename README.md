@@ -427,8 +427,8 @@ ________________________________________
 (Application Info → Open Page Map)
 2.	Select the Books table and locate the Stock field.
 3.	Configure the Criticality property:
-o	Bind it to the stockCriticality field you just added.
-o	Enable “With Icon” under Criticality Representation.
+  -	Bind it to the stockCriticality field you just added.
+  -	Enable “With Icon” under Criticality Representation.
 4.	Save and refresh your application.
 ________________________________________
 
